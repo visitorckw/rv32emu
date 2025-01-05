@@ -79,12 +79,14 @@ static void __trap_handler(riscv_t *rv);
     }
 
 /* FIXME: use more precise methods for updating time, e.g., RTC */
+#if RV32_HAS(Zicsr)
 static uint64_t ctr = 0;
 static inline void update_time(riscv_t *rv)
 {
     rv->csr_time[0] = ctr & 0xFFFFFFFF;
     rv->csr_time[1] = ctr >> 32;
 }
+#endif
 
 #if RV32_HAS(Zicsr)
 /* get a pointer to a CSR */
