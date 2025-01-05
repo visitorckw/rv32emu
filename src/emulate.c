@@ -552,6 +552,7 @@ FORCE_INLINE bool insn_is_translatable(uint8_t opcode)
 }
 #endif
 
+#if RV32_HAS(BLOCK_CHAINING)
 FORCE_INLINE bool insn_is_unconditional_branch(uint8_t opcode)
 {
     switch (opcode) {
@@ -592,6 +593,7 @@ FORCE_INLINE bool insn_is_direct_branch(uint8_t opcode)
         return false;
     }
 }
+#endif
 
 FORCE_INLINE bool insn_is_indirect_branch(uint8_t opcode)
 {
