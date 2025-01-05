@@ -692,6 +692,7 @@ retranslate:
         remove_next_nth_ir(rv, ir, block, count - 1);             \
     }
 
+#if RV32_HAS(MOP_FUSION)
 static inline void remove_next_nth_ir(const riscv_t *rv,
                                       rv_insn_t *ir,
                                       block_t *block,
@@ -706,6 +707,7 @@ static inline void remove_next_nth_ir(const riscv_t *rv,
         block->ir_tail = ir;
     block->n_insn -= n;
 }
+#endif
 
 #if RV32_HAS(MOP_FUSION)
 /* Check if instructions in a block match a specific pattern. If they do,
