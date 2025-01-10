@@ -38,9 +38,9 @@ SHELL_HACK := $(shell mkdir -p $(BIN_DIR)/linux-x86-softfp $(BIN_DIR)/riscv32 $(
 
 ifeq ($(call has, PREBUILT), 1)
 ifeq ($(call has, SYSTEM), 1)
-  LATEST_RELEASE := $(shell wget -q https://api.github.com/repos/sysprog21/rv32emu-prebuilt/releases -O- | grep '"tag_name"' | grep "Linux-Image" | head -n 1 | sed -E 's/.*"tag_name": "([^"]+)".*/\1/')
+  LATEST_RELEASE := $(shell wget https://api.github.com/repos/sysprog21/rv32emu-prebuilt/releases -O- | grep '"tag_name"' | grep "Linux-Image" | head -n 1 | sed -E 's/.*"tag_name": "([^"]+)".*/\1/')
 else
-  LATEST_RELEASE := $(shell wget -q https://api.github.com/repos/sysprog21/rv32emu-prebuilt/releases -O- | grep '"tag_name"' | grep "ELF" | head -n 1 | sed -E 's/.*"tag_name": "([^"]+)".*/\1/')
+  LATEST_RELEASE := $(shell wget https://api.github.com/repos/sysprog21/rv32emu-prebuilt/releases -O- | grep '"tag_name"' | grep "ELF" | head -n 1 | sed -E 's/.*"tag_name": "([^"]+)".*/\1/')
 endif
 else
   # Since rv32emu only supports the dynamic binary translation of integer instruction in tiered compilation currently,
@@ -131,11 +131,11 @@ fetch-checksum:
 ifeq ($(call has, PREBUILT), 1)
 	$(Q)$(PRINTF) "Fetching SHA-1 of prebuilt binaries ... "
 ifeq ($(call has, SYSTEM), 1)
-	$(Q)wget -q -O $(BIN_DIR)/sha1sum-linux-image https://github.com/sysprog21/rv32emu-prebuilt/releases/download/$(LATEST_RELEASE)/sha1sum-linux-image
+	$(Q)wget -O $(BIN_DIR)/sha1sum-linux-image https://github.com/sysprog21/rv32emu-prebuilt/releases/download/$(LATEST_RELEASE)/sha1sum-linux-image
 	$(Q)$(call notice, [OK])
 else
-	$(Q)wget -q -O $(BIN_DIR)/sha1sum-linux-x86-softfp https://github.com/sysprog21/rv32emu-prebuilt/releases/download/$(LATEST_RELEASE)/sha1sum-linux-x86-softfp
-	$(Q)wget -q -O $(BIN_DIR)/sha1sum-riscv32 https://github.com/sysprog21/rv32emu-prebuilt/releases/download/$(LATEST_RELEASE)/sha1sum-riscv32
+	$(Q)wget -O $(BIN_DIR)/sha1sum-linux-x86-softfp https://github.com/sysprog21/rv32emu-prebuilt/releases/download/$(LATEST_RELEASE)/sha1sum-linux-x86-softfp
+	$(Q)wget -O $(BIN_DIR)/sha1sum-riscv32 https://github.com/sysprog21/rv32emu-prebuilt/releases/download/$(LATEST_RELEASE)/sha1sum-riscv32
 	$(Q)$(call notice, [OK])
 endif
 endif
