@@ -67,6 +67,7 @@ ifeq ($(call has, SYSTEM), 1)
 	))
 
 	$(Q)$(eval RV32EMU_PREBUILT_TARBALL := rv32emu-linux-image-prebuilt.tar.gz)
+	$(Q)$(call epilogue,$(notdir $($(T)_DATA_URL)),$(SHA1_FILE1),$(SHA1_FILE2))
 else
 	$(Q)$(eval PREBUILT_X86_FILENAME := $(shell cat $(BIN_DIR)/sha1sum-linux-x86-softfp | awk '{  print $$2 };'))
 	$(Q)$(eval PREBUILT_RV32_FILENAME := $(shell cat $(BIN_DIR)/sha1sum-riscv32 | awk '{ print $$2 };'))
@@ -79,6 +80,7 @@ else
 	))
 
 	$(Q)$(eval RV32EMU_PREBUILT_TARBALL := rv32emu-prebuilt.tar.gz)
+	$(Q)$(call epilogue,$(notdir $($(T)_DATA_URL)),$(SHA1_FILE1),$(SHA1_FILE2))
 endif
 
 	$(Q)if [ "$(RES)" = "1" ]; then \
