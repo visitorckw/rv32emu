@@ -11,9 +11,9 @@ export TARGETDIR := $(shell pwd)
 export WORK := $(TARGETDIR)/build/arch-test
 export RISCV_DEVICE ?= IMACFZicsrZifencei
 
-ifeq ($(RISCV_DEVICE),FCZicsr)
-ARCH_TEST_SUITE := tests/rv32fc-test-suite
-endif
+# ifeq ($(RISCV_DEVICE),FCZicsr)
+# ARCH_TEST_SUITE := tests/rv32fc-test-suite
+# endif
 
 arch-test: riscof-check $(BIN) artifact
 ifeq ($(CROSS_COMPILE),)
