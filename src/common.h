@@ -261,3 +261,4 @@ static inline uint8_t ilog2(uint32_t x)
     ((type *) ((char *) (ptr) - (offsetof(type, member))))
 #endif
 #endif
+
