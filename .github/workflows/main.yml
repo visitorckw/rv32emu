@@ -314,13 +314,13 @@ jobs:
           wget https://apt.llvm.org/llvm.sh
           chmod +x ./llvm.sh
           ./llvm.sh 18
-          echo 'export PATH=/usr/lib/llvm-18/bin:$PATH' >> /etc/profile
         # FIXME: gcc build fails on Aarch64/Linux hosts
         env: |
           CC: clang-18
           PARALLEL: ${{ env.PARALLEL }}
         # Append custom commands here
         run: |
+          export PATH=/usr/lib/llvm-18/bin:$PATH
           make artifact
           make $PARALLEL
           make check $PARALLEL
